@@ -5,87 +5,122 @@
 }
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #8b5cf6;
-  --bg-main: #0f172a;
-  --bg-card: #1e293b;
-  --bg-card-hover: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --border: #334155;
-  --shadow: rgba(99, 102, 241, 0.1);
-  --accent: #06b6d4;
+  --primary: #ffd700;
+  --primary-dark: #b8860b;
+  --secondary: #8b0000;
+  --bg-main: #0a0a0a;
+  --bg-card: #1a1a1a;
+  --bg-card-hover: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border: #333333;
+  --shadow: rgba(255, 215, 0, 0.2);
+  --accent: #8b0000;
+  --error: #dc2626;
+  --batman-yellow: #ffd700;
+  --batman-black: #000000;
+  --batman-gray: #2a2a2a;
+  --batman-red: #8b0000;
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%);
   color: var(--text-primary);
   min-height: 100vh;
   line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Batman Logo Background Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+  opacity: 0.1;
+  z-index: -1;
+  animation: batSignal 8s ease-in-out infinite;
+}
+
+@keyframes batSignal {
+  0%, 100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.15; transform: translate(-50%, -50%) scale(1.1); }
 }
 
 header {
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(10px);
   padding: 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid var(--batman-yellow);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
 }
 
 h1 {
   font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--batman-yellow), var(--primary-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1.5rem;
-  letter-spacing: -0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  font-family: 'Arial Black', sans-serif;
 }
 
 #search-input,
 #region-filter {
   padding: 0.875rem 1.25rem;
   background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: 12px;
+  border: 2px solid var(--batman-yellow);
+  border-radius: 8px;
   color: var(--text-primary);
   font-size: 1rem;
   margin-right: 1rem;
   transition: all 0.3s ease;
   outline: none;
+  font-weight: 600;
 }
 
 #search-input {
   width: 300px;
   max-width: 100%;
+  background: rgba(26, 26, 26, 0.8);
 }
 
 #search-input:focus,
 #region-filter:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--shadow);
-  transform: translateY(-1px);
+  border-color: var(--batman-yellow);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+  background: rgba(42, 42, 42, 0.9);
 }
 
 #region-filter {
   cursor: pointer;
   padding-right: 2.5rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23cbd5e1'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffd700' viewBox='0 0 24 24' stroke='%23ffd700'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1.5rem;
   appearance: none;
+  background-color: rgba(26, 26, 26, 0.8);
 }
 
 #region-filter option {
   background: var(--bg-card);
   color: var(--text-primary);
+  font-weight: 600;
 }
 
 main {
@@ -99,24 +134,35 @@ main {
   text-align: center;
   padding: 3rem;
   font-size: 1.25rem;
-  color: var(--accent);
+  color: var(--batman-yellow);
   animation: pulse 2s ease-in-out infinite;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  50% { 
+    opacity: 0.5; 
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  }
 }
 
 #error {
   display: none;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: white;
+  background: linear-gradient(135deg, var(--batman-red), #dc2626);
+  color: var(--batman-yellow);
   padding: 1rem 1.5rem;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.5);
   animation: slideIn 0.3s ease-out;
+  border: 1px solid var(--batman-yellow);
+  font-weight: 600;
 }
 
 @keyframes slideIn {
@@ -138,9 +184,9 @@ main {
 }
 
 .country-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #2a2a2a 100%);
+  border: 2px solid var(--border);
+  border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -155,7 +201,7 @@ main {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--batman-yellow), var(--batman-red));
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -166,21 +212,22 @@ main {
 
 .country-card:hover {
   transform: translateY(-8px);
-  background: var(--bg-card-hover);
-  border-color: var(--primary);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
-              0 10px 10px -5px rgba(0, 0, 0, 0.2),
-              0 0 0 1px var(--primary);
+  background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%);
+  border-color: var(--batman-yellow);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7),
+              0 0 0 2px var(--batman-yellow),
+              0 0 30px rgba(255, 215, 0, 0.3);
 }
 
 .country-flag {
   width: 100%;
   height: 160px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
+  border: 1px solid var(--batman-yellow);
 }
 
 .country-card:hover .country-flag {
@@ -189,36 +236,53 @@ main {
 
 .country-name {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 0.75rem;
-  color: var(--text-primary);
+  color: var(--batman-yellow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .country-card p {
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
-}
-
-.country-card strong {
-  color: var(--accent);
   font-weight: 600;
 }
 
-#country-details {
-  margin-top: 2rem;
+.country-card strong {
+  color: var(--batman-red);
+  font-weight: 800;
+}
+
+/* Modal Styles */
+#modal-overlay {
+  animation: fadeIn 0.3s ease-out;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .country-details-card {
-  background: linear-gradient(135deg, var(--bg-card) 0%, #1e293b 100%);
-  border: 1px solid var(--primary);
-  border-radius: 20px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border: 3px solid var(--batman-yellow);
+  border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
-              0 0 0 1px var(--primary);
-  animation: fadeInUp 0.4s ease-out;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9),
+              0 0 0 2px var(--batman-yellow),
+              0 0 50px rgba(255, 215, 0, 0.4);
+  animation: slideUp 0.4s ease-out;
   position: relative;
   overflow: hidden;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .country-details-card::before {
@@ -228,7 +292,7 @@ main {
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
   animation: rotate 20s linear infinite;
 }
 
@@ -237,14 +301,14 @@ main {
   to { transform: rotate(360deg); }
 }
 
-@keyframes fadeInUp {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -257,20 +321,24 @@ main {
   width: 100%;
   max-width: 400px;
   height: auto;
-  border-radius: 16px;
+  border-radius: 12px;
   margin-bottom: 2rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
   display: block;
+  border: 2px solid var(--batman-yellow);
 }
 
 .country-details-card h2 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--batman-yellow), var(--primary-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
 }
 
 .country-details-card p {
@@ -278,11 +346,12 @@ main {
   margin-bottom: 1rem;
   color: var(--text-secondary);
   line-height: 1.8;
+  font-weight: 600;
 }
 
 .country-details-card strong {
-  color: var(--accent);
-  font-weight: 600;
+  color: var(--batman-red);
+  font-weight: 800;
   margin-right: 0.5rem;
 }
 
@@ -290,19 +359,49 @@ main {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  background: linear-gradient(135deg, var(--batman-yellow), var(--primary-dark));
+  color: #000000;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: 900;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px -1px var(--shadow);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--batman-yellow);
 }
 
 .country-details-card a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px var(--shadow);
-  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+  background: linear-gradient(135deg, var(--primary-dark), var(--batman-yellow));
+}
+
+/* Close button styling for modal */
+#close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--batman-red);
+  border: 2px solid var(--batman-yellow);
+  color: var(--batman-yellow);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+#close-modal:hover {
+  background: var(--batman-yellow);
+  color: var(--batman-red);
+  transform: scale(1.1);
 }
 
 /* Responsive Design */
@@ -338,6 +437,7 @@ main {
 
   .country-details-card {
     padding: 1.5rem;
+    margin: 1rem;
   }
 
   .country-details-card h2 {
@@ -347,7 +447,7 @@ main {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -355,35 +455,11 @@ main {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 5px;
+  background: var(--batman-yellow);
+  border-radius: 6px;
+  border: 2px solid var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-dark);
-}
-
-/* Modal Styles */
-#modal-overlay {
-  animation: fadeIn 0.3s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.country-details-card {
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
