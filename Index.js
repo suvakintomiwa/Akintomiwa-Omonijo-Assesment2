@@ -61,15 +61,47 @@ function renderCountries(countries) {
 }
 
 async function renderCountryDetails(country) {
-  const detailsContainer = document.getElementById("country-details");
+  // Create modal overlay
+  const modalOverlay = document.createElement('div');
+  modalOverlay.id = 'modal-overlay';
+  modalOverlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 2rem;
+  `;
 
   showLoading();
   try {
     const data = await fetchCountryDetails(country.name.common);
 
-    
-    detailsContainer.innerHTML = `
-      <div class="country-details-card">
+    modalOverlay.innerHTML = `
+      <div class="country-details-card" style="max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;">
+        <button id="close-modal" style="
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: #ef4444;
+          border: none;
+          color: white;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 1.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">×</button>
+        
         <img src="${data.flags.png}" alt="Flag of ${data.name.common}" class="details-flag"/>
         <h2>${data.name.common}</h2>
         <p><strong>Capital:</strong> ${data.capital ? data.capital.join(", ") : "N/A"}</p>
@@ -82,9 +114,39 @@ async function renderCountryDetails(country) {
             : "N/A"
         }</p>
         <p><strong>Timezones:</strong> ${data.timezones ? data.timezones.join(", ") : "N/A"}</p>
-        <p><a href="${data.maps.googleMaps}" target="_blank">View on Google Maps</a></p>
+        <p><a href="${data.maps.googleMaps}" target="_blank" style="
+          display: inline-block;
+          margin-top: 1rem;
+          padding: 0.875rem 2rem;
+          background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+          color: white;
+          text-decoration: none;
+          border-radius: 12px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        ">View on Google Maps</a></p>
       </div>
     `;
+
+    // Add close functionality
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target.id === 'modal-overlay' || e.target.id === 'close-modal') {
+        document.body.removeChild(modalOverlay);
+        document.removeEventListener('keydown', handleEscape);
+      }
+    });
+
+    // Add escape key to close
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        document.body.removeChild(modalOverlay);
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+
+    document.body.appendChild(modalOverlay);
+
   } catch (error) {
     showError("Failed to load country details.");
   } finally {
