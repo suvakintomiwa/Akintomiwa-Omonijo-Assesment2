@@ -1,0 +1,28 @@
+Report on Use of AI in Completing CSS
+
+For this assignment, I made use of an AI tool (Claude AI) to generate the CSS code that I submitted. The following outlines how I used AI, why I chose to do so, and what I learned in the process.
+
+1. How I used AI
+I provided the AI with specific instructions about the style I wanted for my project, including colors, layout structure, and responsiveness. The AI then generated complete CSS code that matched those requirements. I copied this code into my project and made minor adjustments to fit my HTML structure.
+
+2. Why I used AI
+
+To save time writing out repetitive style rules.
+
+To learn new CSS techniques and syntax by seeing how the AI approached the styling.
+
+To experiment with different design ideas quickly, which would have been slower if I had written everything manually.
+
+3. What I learned
+Using the AI-generated CSS helped me understand:
+
+How to structure styles for consistent theming across an entire page.
+
+How media queries work for responsiveness.
+
+How different color palettes and spacing values affect the visual feel of a site.
+
+The importance of not relying blindly on AI output, since some rules needed manual tweaking to fit my specific HTML.
+
+4. Reflection
+AI was not a substitute for understanding CSS, but rather a tool that sped up the process and gave me examples to study. By analyzing the code it generated, I was able to reinforce my own knowledge and get more comfortable with CSS design principles.
