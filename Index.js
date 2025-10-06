@@ -1,4 +1,4 @@
-// === API FUNCTIONS ===
+// API FUNCTIONS 
 async function fetchAllCountries() {
   try {
     const response = await fetch(
